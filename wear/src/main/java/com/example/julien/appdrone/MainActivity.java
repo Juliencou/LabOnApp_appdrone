@@ -22,6 +22,8 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         boutonfollow.setOnClickListener(this);
         Button boutoncontrol = findViewById(R.id.button2);
         boutoncontrol.setOnClickListener(this);
+        Button boutonbag = findViewById(R.id.button3);
+        boutonbag.setOnClickListener(this);
         // Enables Always-on
         setAmbientEnabled();
     }
@@ -37,8 +39,11 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         else if (view.getId()==R.id.button2){
             Intent intent2=new Intent(this, ActivityControl.class);
             startActivity(intent2);
+        }
+        else if(view.getId() == R.id.button3){
 
-
+            Intent intent3 = new Intent(this, ActivityBag.class);
+            startActivity(intent3);
         }
 
 

@@ -33,7 +33,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activityfollow" />
-        <activity android:name=".ActivityControl"></activity>
+        <activity android:name=".ActivityControl"/>
+        <activity android:name=".ActivityBag"></activity>
     </application>
 
 </manifest>

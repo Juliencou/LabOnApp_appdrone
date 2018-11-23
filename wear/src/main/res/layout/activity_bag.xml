@@ -6,13 +6,14 @@
     android:layout_height="match_parent">
 
     <Spinner
-        android:id="@+id/_add_bag_item_button"
-        android:layout_width="194dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/add_bag_item_spinner"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="2dp"
+        android:entries="@array/country_arrays"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/_item_bag_list"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_add_bag_item_button" />
+        app:layout_constraintTop_toBottomOf="@+id/add_bag_item_spinner" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
