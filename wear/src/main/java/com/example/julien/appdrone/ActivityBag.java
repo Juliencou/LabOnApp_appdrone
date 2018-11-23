@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -23,12 +24,14 @@ public class ActivityBag extends Activity
             "Phone"
     };
     final List<String> items_array = new ArrayList<String>(Arrays.asList(items));
+    int first_time = 1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bag);
+
 
         final Spinner spinner = (Spinner) findViewById(R.id.add_bag_item_spinner);
 
@@ -43,9 +46,16 @@ public class ActivityBag extends Activity
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 // An item was selected. You can retrieve the selected item using
                 // parent.getItemAtPosition(pos)
-                String item_selected = parent.getItemAtPosition(pos).toString();
-                items_array.add(item_selected);
-                arrayAdapter.notifyDataSetChanged();
+                if(first_time == 0)
+                {
+                    String item_selected = parent.getItemAtPosition(pos).toString();
+                    items_array.add(item_selected);
+                    Toast.makeText
+                            (getApplicationContext(), "New item added", Toast.LENGTH_SHORT)
+                            .show();
+                    arrayAdapter.notifyDataSetChanged();
+                }
+                first_time = 0;
 
             }
 
