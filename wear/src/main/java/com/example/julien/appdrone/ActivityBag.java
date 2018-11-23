@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 
 public class ActivityBag extends Activity
