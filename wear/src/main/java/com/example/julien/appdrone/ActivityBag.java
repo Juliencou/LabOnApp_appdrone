@@ -67,5 +67,14 @@ public class ActivityBag extends Activity
 
         });
 
+        item_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText
+                        (getApplicationContext(), "Item was clicked", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
     }
 }
