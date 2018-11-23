@@ -7,9 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+
 public class MainActivity extends WearableActivity implements View.OnClickListener {
 
+    String[] items = new String[] {
+            "Keys"
+    };
     private TextView mTextView;
+    ArrayList<String> bag_array = new ArrayList<String>(Arrays.asList(items));
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         // Enables Always-on
         setAmbientEnabled();
     }
+    static final int GET_BAG_ARRAY = 1;
 
     @Override
     public void onClick(View view) {
@@ -43,9 +52,23 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         else if(view.getId() == R.id.button3){
 
             Intent intent3 = new Intent(this, ActivityBag.class);
-            startActivity(intent3);
+            intent3.putExtra("array_list", bag_array);
+            startActivityForResult(intent3,GET_BAG_ARRAY);
         }
 
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent)
+    {
+        if(requestCode == GET_BAG_ARRAY)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                bag_array = resultIntent.getStringArrayListExtra("mydata");
+            }
+        }
 
     }
 }

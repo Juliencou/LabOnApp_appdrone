@@ -7,13 +7,10 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="add_element_button">Add element</string>
     <string-array name="country_arrays">
-        <item>Malaysia</item>
-        <item>United States</item>
-        <item>Indonesia</item>
-        <item>France</item>
-        <item>Italy</item>
-        <item>Singapore</item>
-        <item>New Zealand</item>
-        <item>India</item>
+        <item>Keys</item>
+        <item>Phone</item>
+        <item>Wallet</item>
+        <item>Water</item>
+        <item>Earphones</item>
     </string-array>
 </resources>
