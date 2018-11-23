@@ -2,6 +2,7 @@ package com.example.julien.appdrone;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -9,16 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import android.support.v4.app.FragmentManager;
+
 import android.content.Intent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-
-public class ActivityBag extends Activity
+public class ActivityBag extends FragmentActivity
 {
     int first_time = 1;
+    FragmentManager fm = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,6 @@ public class ActivityBag extends Activity
                     arrayAdapter.notifyDataSetChanged();
                 }
                 first_time = 0;
-
             }
 
             @Override
@@ -67,12 +67,15 @@ public class ActivityBag extends Activity
 
         });
 
-        item_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        item_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText
-                        (getApplicationContext(), "Item was clicked", Toast.LENGTH_SHORT)
-                        .show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                BagFragmentDialog alertdFragment = new BagFragmentDialog();
+                        // Show Alert DialogFragment
+                alertdFragment.show(fm, "Alert Dialog Fragment");
+
             }
         });
 
