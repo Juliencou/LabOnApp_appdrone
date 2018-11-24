@@ -2,7 +2,6 @@ package com.example.julien.appdrone;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,16 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import android.support.v4.app.FragmentManager;
 
 import android.content.Intent;
 
 import java.util.ArrayList;
 
-public class ActivityBag extends FragmentActivity
+public class ActivityBag extends Activity
 {
     int first_time = 1;
-    FragmentManager fm = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +69,6 @@ public class ActivityBag extends FragmentActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                BagFragmentDialog alertdFragment = new BagFragmentDialog();
-                        // Show Alert DialogFragment
-                alertdFragment.show(fm, "Alert Dialog Fragment");
 
             }
         });
