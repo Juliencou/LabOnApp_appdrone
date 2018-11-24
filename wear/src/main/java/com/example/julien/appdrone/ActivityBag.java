@@ -1,6 +1,8 @@
 package com.example.julien.appdrone;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -70,12 +72,28 @@ public class ActivityBag extends FragmentActivity
         item_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id)
             {
-                BagFragmentDialog alertdFragment = new BagFragmentDialog();
-                        // Show Alert DialogFragment
-                alertdFragment.show(fm, "Alert Dialog Fragment");
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityBag.this);
+                alertDialogBuilder.setMessage("Delete selected item ?");
+                        alertDialogBuilder.setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        items_array.remove(position);
+                                        arrayAdapter.notifyDataSetChanged();
+                                    }
+                                });
 
+                alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
