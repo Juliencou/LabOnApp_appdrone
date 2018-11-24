@@ -21,6 +21,13 @@ public class ActivityBag extends FragmentActivity
 {
     int first_time = 1;
     FragmentManager fm = getSupportFragmentManager();
+    String[] spinner_item_array = {
+        "Keys",
+        "Phone",
+        "Wallet",
+        "Water",
+        "Earphones"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,12 @@ public class ActivityBag extends FragmentActivity
 
 
         final Spinner spinner = (Spinner) findViewById(R.id.add_bag_item_spinner);
+
+        final spinnerAdapter adapter = new spinnerAdapter(ActivityBag.this, android.R.layout.simple_list_item_1);
+        adapter.addAll(spinner_item_array);
+        adapter.add("Add item");
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getCount());
 
         final ListView item_list = (ListView) findViewById(R.id._item_bag_list);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
@@ -55,30 +68,31 @@ public class ActivityBag extends FragmentActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
-                if(first_time == 0)
+                if(spinner.getSelectedItem() == "This is Hint Text")
                 {
-                    if(items_array.contains("Empty bag"))
-                    {
-                        items_array.remove("Empty bag");
-                        arrayAdapter.notifyDataSetChanged();
-                    }
-                    String item_selected = parent.getItemAtPosition(pos).toString();
-
-                    if (items_array.contains(item_selected))
-                    {
-                        //Do noting
-                    }
-                    else
-                    {
-                        items_array.add(item_selected);
-                        Toast.makeText
-                                (getApplicationContext(), "New item added", Toast.LENGTH_SHORT)
-                                .show();
-                        arrayAdapter.notifyDataSetChanged();
-                    }
-
+                    //Do nothing.
                 }
-                first_time = 0;
+                else {
+                    if (first_time == 0) {
+                        if (items_array.contains("Empty bag")) {
+                            items_array.remove("Empty bag");
+                            arrayAdapter.notifyDataSetChanged();
+                        }
+                        String item_selected = parent.getItemAtPosition(pos).toString();
+
+                        if (items_array.contains(item_selected)) {
+                            //Do noting
+                        } else {
+                            items_array.add(item_selected);
+                            Toast.makeText
+                                    (getApplicationContext(), "New item added", Toast.LENGTH_SHORT)
+                                    .show();
+                            arrayAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                    first_time = 0;
+                }
             }
 
             @Override
@@ -107,6 +121,7 @@ public class ActivityBag extends FragmentActivity
                                     if(items_array.isEmpty())
                                     {
                                         items_array.add("Empty bag");
+
                                         arrayAdapter.notifyDataSetChanged();
                                     }
                                 }
