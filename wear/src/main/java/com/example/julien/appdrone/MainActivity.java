@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class MainActivity extends WearableActivity implements View.OnClickListener {
 
     String[] items = new String[] {
-            "Keys"
     };
     private TextView mTextView;
     ArrayList<String> bag_array = new ArrayList<String>(Arrays.asList(items));

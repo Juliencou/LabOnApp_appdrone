@@ -13,11 +13,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="2dp"
-        android:entries="@array/country_arrays"
+        android:entries="@array/items_arrays"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/_item_bag_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

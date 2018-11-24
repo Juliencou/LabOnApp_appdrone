@@ -44,12 +44,24 @@ public class ActivityBag extends FragmentActivity
 
         setResult(RESULT_OK, intent);
 
+        if(items_array.isEmpty())
+        {
+            items_array.add("Empty bag");
+            arrayAdapter.notifyDataSetChanged();
+        }
+
+        //After user clicks on the spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
                 if(first_time == 0)
                 {
+                    if(items_array.contains("Empty bag"))
+                    {
+                        items_array.remove("Empty bag");
+                        arrayAdapter.notifyDataSetChanged();
+                    }
                     String item_selected = parent.getItemAtPosition(pos).toString();
 
                     if (items_array.contains(item_selected))
@@ -76,31 +88,41 @@ public class ActivityBag extends FragmentActivity
 
         });
 
+        //After user clicks on one of the item in the list
         item_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id)
             {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityBag.this);
-                alertDialogBuilder.setMessage("Delete selected item ?");
-                        alertDialogBuilder.setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface arg0, int arg1) {
-                                        items_array.remove(position);
+                if(!items_array.contains("Empty bag"))
+                {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityBag.this);
+                    alertDialogBuilder.setMessage("Delete selected item ?");
+                    alertDialogBuilder.setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    items_array.remove(position);
+                                    arrayAdapter.notifyDataSetChanged();
+                                    if(items_array.isEmpty())
+                                    {
+                                        items_array.add("Empty bag");
                                         arrayAdapter.notifyDataSetChanged();
                                     }
-                                });
+                                }
+                            });
 
-                alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
+                        }
+                    });
 
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+
             }
         });
 

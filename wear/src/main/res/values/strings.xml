@@ -6,7 +6,7 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="add_element_button">Add element</string>
-    <string-array name="country_arrays">
+    <string-array name="items_arrays">
         <item>Keys</item>
         <item>Phone</item>
         <item>Wallet</item>
