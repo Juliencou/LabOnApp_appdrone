@@ -1,6 +1,5 @@
 package com.example.julien.appdrone;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -48,16 +47,24 @@ public class ActivityBag extends FragmentActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                // An item was selected. You can retrieve the selected item using
-                // parent.getItemAtPosition(pos)
+
                 if(first_time == 0)
                 {
                     String item_selected = parent.getItemAtPosition(pos).toString();
-                    items_array.add(item_selected);
-                    Toast.makeText
-                            (getApplicationContext(), "New item added", Toast.LENGTH_SHORT)
-                            .show();
-                    arrayAdapter.notifyDataSetChanged();
+
+                    if (items_array.contains(item_selected))
+                    {
+                        //Do noting
+                    }
+                    else
+                    {
+                        items_array.add(item_selected);
+                        Toast.makeText
+                                (getApplicationContext(), "New item added", Toast.LENGTH_SHORT)
+                                .show();
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+
                 }
                 first_time = 0;
             }
