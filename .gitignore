@@ -1,5 +1,9 @@
 *.iml
 .gradle
+.idea/misc.xml
+.idea/runConfiguration.xml
+.idea/gradle.xml
+.idea/vcs.xml
 /local.properties
 /.idea/caches/build_file_checksums.ser
 /.idea/libraries
