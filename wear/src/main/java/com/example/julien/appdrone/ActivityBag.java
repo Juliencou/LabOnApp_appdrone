@@ -74,10 +74,10 @@ public class ActivityBag extends FragmentActivity
                 }
                 else {
                     if (first_time == 0) {
-                        /*if (items_array.contains("Empty bag")) {
+                        if (items_array.contains("Empty bag")) {
                             items_array.remove("Empty bag");
                             arrayAdapter.notifyDataSetChanged();
-                        }*/
+                        }
                         String item_selected = parent.getItemAtPosition(pos).toString();
 
                         if (items_array.contains(item_selected)) {
