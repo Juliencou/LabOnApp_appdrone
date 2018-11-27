@@ -74,10 +74,10 @@ public class ActivityBag extends FragmentActivity
                 }
                 else {
                     if (first_time == 0) {
-                        if (items_array.contains("Empty bag")) {
+                        /*if (items_array.contains("Empty bag")) {
                             items_array.remove("Empty bag");
                             arrayAdapter.notifyDataSetChanged();
-                        }
+                        }*/
                         String item_selected = parent.getItemAtPosition(pos).toString();
 
                         if (items_array.contains(item_selected)) {
@@ -118,12 +118,12 @@ public class ActivityBag extends FragmentActivity
                                 public void onClick(DialogInterface arg0, int arg1) {
                                     items_array.remove(position);
                                     arrayAdapter.notifyDataSetChanged();
-                                    if(items_array.isEmpty())
+                                    /*if(items_array.isEmpty())
                                     {
                                         items_array.add("Empty bag");
 
                                         arrayAdapter.notifyDataSetChanged();
-                                    }
+                                    }*/
                                 }
                             });
 
