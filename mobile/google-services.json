@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "868091832669-2ptl5n5l072rk123je3smo095s548b59.apps.googleusercontent.com",
+          "client_id": "868091832669-ahj1rbc3jjda5gha0f3l40dch6ehg82c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.julien.appdrone",
-            "certificate_hash": "389321e3d1b5f825deb1aefccc60f53e9c3a8771"
+            "certificate_hash": "a1a4d6db6175ebb4f87a60eac1717dcaf0fc9c06"
           }
         },
         {

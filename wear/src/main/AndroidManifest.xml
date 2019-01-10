@@ -23,18 +23,16 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".activityfollow" />
+        <activity android:name=".ActivityControl" />
+        <activity android:name=".ActivityBag" />
+        <activity android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activityfollow" />
-        <activity android:name=".ActivityControl"/>
-        <activity android:name=".ActivityBag"></activity>
     </application>
 
 </manifest>

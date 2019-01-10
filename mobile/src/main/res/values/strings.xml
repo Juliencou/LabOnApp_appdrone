@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">appdrone</string>
+    <string name="app_name">Drone companion</string>
+    <string name="welcomeText">Welcome. Please login</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_title_my_profile">Profile</string>
+    <string name="tab_title_my_history">History</string>
+    <string name="tab_title_my_settings">Settings</string>
+    <string name="action_settings">WTF IS THIS STRING</string>
 </resources>
