@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "868091832669",
+    "firebase_url": "https://labonappappdrone.firebaseio.com",
+    "project_id": "labonappappdrone",
+    "storage_bucket": "labonappappdrone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868091832669:android:4239e96644ea864a",
+        "android_client_info": {
+          "package_name": "com.example.julien.appdrone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868091832669-ahj1rbc3jjda5gha0f3l40dch6ehg82c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.julien.appdrone",
+            "certificate_hash": "a1a4d6db6175ebb4f87a60eac1717dcaf0fc9c06"
+          }
+        },
+        {
+          "client_id": "868091832669-ddk6fgs94p8fikelh5isstiol32ll4m6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsqpes7aITPVCBBjxOGeEiFpQr2jxK2is"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868091832669-ddk6fgs94p8fikelh5isstiol32ll4m6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
