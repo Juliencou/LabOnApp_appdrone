@@ -24,7 +24,7 @@ public class MyHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_history,container,false);
-        btnTEST = (Button) view.findViewById(R.id.btnTEST2);
+        btnTEST = view.findViewById(R.id.btnTEST2);
 
         btnTEST.setOnClickListener(new View.OnClickListener() {
             @Override

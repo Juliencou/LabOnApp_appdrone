@@ -24,7 +24,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = (TextView) findViewById(R.id.text);
+        mTextView = findViewById(R.id.text);
 
         Button boutonfollow = findViewById(R.id.button);
         boutonfollow.setOnClickListener(this);

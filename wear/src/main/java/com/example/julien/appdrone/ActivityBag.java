@@ -35,10 +35,10 @@ public class ActivityBag extends FragmentActivity
         setContentView(R.layout.activity_bag);
 
         Bundle bundle = getIntent().getExtras();
-        final ArrayList<String> items_array = (ArrayList<String>) bundle.getStringArrayList("array_list");
+        final ArrayList<String> items_array = bundle.getStringArrayList("array_list");
 
 
-        final Spinner spinner = (Spinner) findViewById(R.id.add_bag_item_spinner);
+        final Spinner spinner = findViewById(R.id.add_bag_item_spinner);
 
         final spinnerAdapter adapter = new spinnerAdapter(ActivityBag.this, android.R.layout.simple_list_item_1);
         adapter.addAll(spinner_item_array);
@@ -46,7 +46,7 @@ public class ActivityBag extends FragmentActivity
         spinner.setAdapter(adapter);
         spinner.setSelection(adapter.getCount());
 
-        final ListView item_list = (ListView) findViewById(R.id._item_bag_list);
+        final ListView item_list = findViewById(R.id._item_bag_list);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, items_array);
 
