@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "868091832669-987a7mv7hllnm2cucop33pjj1aghm9un.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.julien.appdrone",
+            "certificate_hash": "001c2254868b1dc54241eb60c86cb261c164c186"
+          }
+        },
+        {
           "client_id": "868091832669-ddk6fgs94p8fikelh5isstiol32ll4m6.apps.googleusercontent.com",
           "client_type": 3
         }
