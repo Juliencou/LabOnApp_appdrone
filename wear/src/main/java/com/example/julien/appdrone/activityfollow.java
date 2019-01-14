@@ -12,7 +12,7 @@ public class activityfollow extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activityfollow);
+        setContentView(R.layout.activity_follow);
         Button tkoff= findViewById(R.id.button6);
         Button follow = findViewById(R.id.button7);
         tkoff.setText("Take off");

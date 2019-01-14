@@ -1,6 +1,7 @@
 package com.example.julien.appdrone;
 
 import android.support.wearable.activity.WearableActivity;
+import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 
 import android.content.Intent;
@@ -8,6 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.julien.appdrone.drone.BebopDrone;
+import com.parrot.arsdk.arcontroller.ARCONTROLLER_DEVICE_STATE_ENUM;
+import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +23,9 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
     private TextView mTextView;
     ArrayList<String> bag_array = new ArrayList<String>(Arrays.asList(items));
 
+    private BebopDrone mBebopDrone;
+
+    private ARDiscoveryDeviceService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +42,19 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         boutonbag.setOnClickListener(this);
         // Enables Always-on
         setAmbientEnabled();
+
+
+        Intent intent = getIntent();
+        this.service = intent.getParcelableExtra(DeviceListActivity.EXTRA_DEVICE_SERVICE);
+        //mBebopDrone = new BebopDrone(this, service);
     }
     static final int GET_BAG_ARRAY = 1;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -47,6 +66,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         }
         else if (view.getId()==R.id.button2){
             Intent intent2=new Intent(this, ActivityControl.class);
+            intent2.putExtra("deviceService", service);
             startActivity(intent2);
         }
         else if(view.getId() == R.id.button3){
