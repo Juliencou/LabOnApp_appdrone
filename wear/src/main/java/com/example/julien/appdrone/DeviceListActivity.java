@@ -37,6 +37,7 @@ public class DeviceListActivity extends WearableActivity {
 
     // List of runtime permissions needed
     private static final String[] PERMISSIONS_NEEDED = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_COARSE_LOCATION,
     };
 
@@ -204,8 +205,8 @@ public class DeviceListActivity extends WearableActivity {
             // fill data
             ViewHolder holder = (ViewHolder) rowView.getTag();
             ARDiscoveryDeviceService service = (ARDiscoveryDeviceService)getItem(position);
-            //holder.text.setText(service.getName() + " on " + service.getNetworkType());
-            holder.text.setText(service.getName());
+            holder.text.setText(service.getName() + " on " + service.getNetworkType());
+            //holder.text.setText(service.getName());
 
             return rowView;
         }
