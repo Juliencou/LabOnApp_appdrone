@@ -3,21 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/light_grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/followButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/follow" />
+        <ImageButton
+            android:id="@+id/followButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/follow" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -27,21 +29,25 @@
             android:layout_below="@+id/followButton"
             android:layout_marginTop="10dp">
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageButton
                 android:id="@+id/controlButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/control" />
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageButton
                 android:id="@+id/bagButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/bag" />
         </LinearLayout>
 

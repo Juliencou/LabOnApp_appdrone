@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/light_grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,34 +17,39 @@
             android:layout_marginTop="45dp"
             android:id="@+id/linearLayout">
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageButton
                 android:id="@+id/takeOffLandButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:clickable="true"
                 android:focusable="true"
-
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/takeoff" />
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageButton
                 android:id="@+id/takePictureButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginLeft="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/camera" />
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <ImageButton
             android:id="@+id/emergencyButton"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginTop="5dp"
             android:layout_below="@id/linearLayout"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/emergency" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
