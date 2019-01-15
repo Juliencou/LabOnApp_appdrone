@@ -1,19 +1,13 @@
 package com.example.julien.appdrone;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.wearable.activity.WearableActivity;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.julien.appdrone.drone.BebopDrone;
+import com.example.julien.appdrone.utils.Constant;
 import com.parrot.arsdk.arcommands.ARCOMMANDS_ARDRONE3_MEDIARECORDEVENT_PICTUREEVENTCHANGED_ERROR_ENUM;
 import com.parrot.arsdk.arcommands.ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_ENUM;
 import com.parrot.arsdk.arcontroller.ARCONTROLLER_DEVICE_STATE_ENUM;
@@ -21,36 +15,32 @@ import com.parrot.arsdk.arcontroller.ARControllerCodec;
 import com.parrot.arsdk.arcontroller.ARFrame;
 import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 
-import java.text.BreakIterator;
 
-
-public class ActivityControl extends WearableActivity {
-    private static final String TAG = "BebopActivity";
+public class ControlActivity extends WearableActivity {
+    private static final String TAG = "ControlActivity";
     private BebopDrone mBebopDrone;
 
-    private Button mButtonTakeOffLand;
+    private FloatingActionButton mButtonTakeOffLand;
+    private FloatingActionButton mButtonEmergency;
+    private FloatingActionButton mButtonCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
 
-        Intent i = getIntent();
-        ARDiscoveryDeviceService service = i.getParcelableExtra("deviceService");
+        Intent intent = getIntent();
+        ARDiscoveryDeviceService service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
         mBebopDrone = new BebopDrone(this, service);
         mBebopDrone.addListener(mBebopListener);
 
-        //mBebopDrone = (BebopDrone) i.getSerializableExtra("droneRef");
-        //mBebopDrone.addListener(mBebopListener);
-
-        initControl();
+        initActivity();
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         // show a loading view while the bebop drone is connecting
         if ((mBebopDrone != null) && !(ARCONTROLLER_DEVICE_STATE_ENUM.ARCONTROLLER_DEVICE_STATE_RUNNING.equals(mBebopDrone.getConnectionState()))) {
             // if the connection to the Bebop fails, finish the activity
@@ -70,8 +60,9 @@ public class ActivityControl extends WearableActivity {
         }
     }
 
-    private void initControl() {
-        mButtonTakeOffLand = (Button) findViewById(R.id.buttonTakeOffLand);
+    private void initActivity() {
+        // Land-Takeoff button
+        mButtonTakeOffLand = findViewById(R.id.takeOffLandButton);
         mButtonTakeOffLand.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switch (mBebopDrone.getFlyingState()) {
@@ -84,6 +75,22 @@ public class ActivityControl extends WearableActivity {
                         break;
                     default:
                 }
+            }
+        });
+
+        // Emergency button
+        mButtonEmergency = findViewById(R.id.emergencyButton);
+        mButtonEmergency.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mBebopDrone.emergency();
+            }
+        });
+
+        // Take picture
+        mButtonCamera =  findViewById(R.id.takePictureButton);
+        mButtonCamera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mBebopDrone.takePicture();
             }
         });
     }
@@ -106,12 +113,28 @@ public class ActivityControl extends WearableActivity {
         }
 
         @Override
+        public void onPilotingStateChanged(ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_ENUM state) {
+            switch (state) {
+                case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
+                    mButtonTakeOffLand.setImageDrawable(getResources().getDrawable(R.drawable.takeoff, getApplicationContext().getTheme()));
+                    mButtonTakeOffLand.setEnabled(true);
+                    break;
+                case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
+                case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
+                    mButtonTakeOffLand.setImageDrawable(getResources().getDrawable(R.drawable.land, getApplicationContext().getTheme()));
+                    mButtonTakeOffLand.setEnabled(true);
+                    break;
+                default:
+                    mButtonTakeOffLand.setEnabled(false);
+            }
+        }
+
+        @Override
         public void onDownloadProgressed(String mediaName, int progress) {
         }
 
         @Override
         public void onFrameReceived(ARFrame frame) {
-
         }
 
         @Override
@@ -120,33 +143,14 @@ public class ActivityControl extends WearableActivity {
 
         @Override
         public void onBatteryChargeChanged(int batteryPercentage) {
-
         }
+
         @Override
         public void onPictureTaken(ARCOMMANDS_ARDRONE3_MEDIARECORDEVENT_PICTUREEVENTCHANGED_ERROR_ENUM error) {
         }
 
         @Override
         public void configureDecoder(ARControllerCodec codec) {
-        }
-
-
-        @Override
-        public void onPilotingStateChanged(ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_ENUM state) {
-            switch (state) {
-                case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
-                    mButtonTakeOffLand.setText("Take off");
-                    mButtonTakeOffLand.setEnabled(true);
-                    break;
-                case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
-                case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
-                    mButtonTakeOffLand.setText("Land");
-                    mButtonTakeOffLand.setEnabled(true);
-                    mButtonTakeOffLand.setEnabled(false);
-                    break;
-                default:
-                    mButtonTakeOffLand.setEnabled(false);
-            }
         }
 
         @Override

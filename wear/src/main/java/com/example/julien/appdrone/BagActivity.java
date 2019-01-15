@@ -15,10 +15,14 @@ import android.support.v4.app.FragmentManager;
 
 import android.content.Intent;
 
+import com.example.julien.appdrone.utils.Constant;
+
 import java.util.ArrayList;
 
-public class ActivityBag extends FragmentActivity
+public class BagActivity extends FragmentActivity
 {
+    private static final String TAG = "BagActivity";
+
     int first_time = 1;
     FragmentManager fm = getSupportFragmentManager();
     String[] spinner_item_array = {
@@ -35,12 +39,12 @@ public class ActivityBag extends FragmentActivity
         setContentView(R.layout.activity_bag);
 
         Bundle bundle = getIntent().getExtras();
-        final ArrayList<String> items_array = bundle.getStringArrayList("array_list");
+        final ArrayList<String> items_array = bundle.getStringArrayList(Constant.BAG_TAG);
 
 
         final Spinner spinner = findViewById(R.id.add_bag_item_spinner);
 
-        final spinnerAdapter adapter = new spinnerAdapter(ActivityBag.this, android.R.layout.simple_list_item_1);
+        final spinnerAdapter adapter = new spinnerAdapter(BagActivity.this, android.R.layout.simple_list_item_1);
         adapter.addAll(spinner_item_array);
         adapter.add("Add item");
         spinner.setAdapter(adapter);
@@ -53,7 +57,7 @@ public class ActivityBag extends FragmentActivity
         item_list.setAdapter(arrayAdapter);
 
         Intent intent = new Intent();
-        intent.putExtra("mydata", items_array);
+        intent.putExtra(Constant.BAG_TAG, items_array);
 
         setResult(RESULT_OK, intent);
 
@@ -110,7 +114,7 @@ public class ActivityBag extends FragmentActivity
             {
                 if(!items_array.contains("Empty bag"))
                 {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityBag.this);
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BagActivity.this);
                     alertDialogBuilder.setMessage("Delete selected item ?");
                     alertDialogBuilder.setPositiveButton("Yes",
                             new DialogInterface.OnClickListener() {

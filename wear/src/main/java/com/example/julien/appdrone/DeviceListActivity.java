@@ -25,6 +25,7 @@ import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 import com.parrot.arsdk.ardiscovery.ARDiscoveryService;
 import com.example.julien.appdrone.R;
 import com.example.julien.appdrone.discovery.DroneDiscoverer;
+import com.example.julien.appdrone.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,25 +33,21 @@ import java.util.List;
 import java.util.Set;
 
 public class DeviceListActivity extends WearableActivity {
-    public static final String EXTRA_DEVICE_SERVICE = "EXTRA_DEVICE_SERVICE";
-
     private static final String TAG = "DeviceListActivity";
 
-    /** List of runtime permission we need. */
+    // List of runtime permissions needed
     private static final String[] PERMISSIONS_NEEDED = new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_COARSE_LOCATION,
     };
 
-    /** Code for permission request result handling. */
+    // Code for permission request result handling
     private static final int REQUEST_CODE_PERMISSIONS_REQUEST = 1;
 
     public DroneDiscoverer mDroneDiscoverer;
 
     private final List<ARDiscoveryDeviceService> mDronesList = new ArrayList<>();
 
-    // this block loads the native libraries
-    // it is mandatory
+    // load the native libraries
     static {
         ARSDK.loadSDKLibs();
     }
@@ -60,7 +57,7 @@ public class DeviceListActivity extends WearableActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
-        final ListView listView = (ListView) findViewById(R.id.list);
+        final ListView listView = (ListView) findViewById(R.id.listDevices);
 
         // Assign adapter to ListView
         listView.setAdapter(mAdapter);
@@ -69,7 +66,7 @@ public class DeviceListActivity extends WearableActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                // launch the activity related to the type of discovery device service
+                // launch the activity based on the device
                 Intent intent = null;
 
                 ARDiscoveryDeviceService service = (ARDiscoveryDeviceService)mAdapter.getItem(position);
@@ -85,7 +82,8 @@ public class DeviceListActivity extends WearableActivity {
                 }
 
                 if (intent != null) {
-                    intent.putExtra(EXTRA_DEVICE_SERVICE, service);
+                    // goto main dashboard
+                    intent.putExtra(Constant.DRONE_SERVICE, service);
                     startActivity(intent);
                 }
             }
@@ -97,7 +95,6 @@ public class DeviceListActivity extends WearableActivity {
         for (String permission : PERMISSIONS_NEEDED) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                    Toast.makeText(this, "Please allow permission " + permission, Toast.LENGTH_LONG).show();
                     finish();
                     return;
                 } else {
@@ -116,11 +113,9 @@ public class DeviceListActivity extends WearableActivity {
     protected void onResume()
     {
         super.onResume();
-
         // setup the drone discoverer and register as listener
         mDroneDiscoverer.setup();
         mDroneDiscoverer.addListener(mDiscovererListener);
-
         // start discovering
         mDroneDiscoverer.startDiscovering();
     }
@@ -129,7 +124,6 @@ public class DeviceListActivity extends WearableActivity {
     protected void onPause()
     {
         super.onPause();
-
         // clean the drone discoverer object
         mDroneDiscoverer.stopDiscovering();
         mDroneDiscoverer.cleanup();
@@ -154,7 +148,7 @@ public class DeviceListActivity extends WearableActivity {
         }
 
         if (denied) {
-            Toast.makeText(this, "At least one permission is missing.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Permission required...", Toast.LENGTH_LONG).show();
             finish();
         }
     }
@@ -165,7 +159,6 @@ public class DeviceListActivity extends WearableActivity {
         public void onDronesListUpdated(List<ARDiscoveryDeviceService> dronesList) {
             mDronesList.clear();
             mDronesList.addAll(dronesList);
-
             mAdapter.notifyDataSetChanged();
         }
     };
@@ -211,7 +204,8 @@ public class DeviceListActivity extends WearableActivity {
             // fill data
             ViewHolder holder = (ViewHolder) rowView.getTag();
             ARDiscoveryDeviceService service = (ARDiscoveryDeviceService)getItem(position);
-            holder.text.setText(service.getName() + " on " + service.getNetworkType());
+            //holder.text.setText(service.getName() + " on " + service.getNetworkType());
+            holder.text.setText(service.getName());
 
             return rowView;
         }

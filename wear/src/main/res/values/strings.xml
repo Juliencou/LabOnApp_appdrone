@@ -6,6 +6,12 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="add_element_button">Add element</string>
+    <string name="splash_app_name">HORUS</string>
+    <string name="splash_app_motto">your eye in the sky</string>
+    <string name="select_drone">Select drone...</string>
+    <string name="DEVICE_SERVICE">deviceService</string>
+    <string name="text_action_takeoff">Take Off</string>
+    <string name="text_action_emergency">Emergency</string>
     <string-array name="items_arrays">
         <item>Keys</item>
         <item>Phone</item>
