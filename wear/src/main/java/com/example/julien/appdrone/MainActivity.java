@@ -1,11 +1,16 @@
 package com.example.julien.appdrone;
 
+import android.media.Image;
 import android.support.wearable.activity.WearableActivity;
+import android.util.Log;
 import android.view.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.julien.appdrone.drone.BebopDrone;
 import com.example.julien.appdrone.utils.Constant;
@@ -28,7 +33,6 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
 
     static final int GET_BAG_ARRAY = 1;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,15 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         // Enables Always-on
         setAmbientEnabled();
 
-        mTextView = findViewById(R.id.text);
+        //mTextView = findViewById(R.id.text);
+
+        ImageButton button_bag = findViewById(R.id.bagButton);
+        button_bag.setOnClickListener(this);
+        ImageButton button_follow = findViewById(R.id.followButton);
+        button_follow.setOnClickListener(this);
+        ImageButton button_control = findViewById(R.id.controlButton);
+        button_control.setOnClickListener(this);
+
 
         Intent intent = getIntent();
         this.service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
@@ -69,17 +81,21 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
             intent.putExtra(Constant.BAG_TAG, bag_array);
             startActivityForResult(intent,GET_BAG_ARRAY);
         }
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent)
     {
-        if(requestCode == GET_BAG_ARRAY && requestCode == RESULT_OK)
+        if(requestCode == GET_BAG_ARRAY && resultCode == RESULT_OK)
         {
             bag_array = resultIntent.getStringArrayListExtra(Constant.BAG_TAG);
         }
 
     }
+
+
 
 
 }

@@ -19,6 +19,7 @@
             android:focusable="true"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:background="@color/light_grey"
             android:src="@drawable/follow" />
 
         <LinearLayout
@@ -37,6 +38,7 @@
                 android:focusable="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
+                android:background="@color/light_grey"
                 android:src="@drawable/control" />
 
             <ImageButton
@@ -48,6 +50,7 @@
                 android:focusable="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
+                android:background="@color/light_grey"
                 android:src="@drawable/bag" />
         </LinearLayout>
 

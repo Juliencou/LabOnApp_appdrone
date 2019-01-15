@@ -12,7 +12,7 @@
     <string name="DEVICE_SERVICE">deviceService</string>
     <string name="text_action_takeoff">Take Off</string>
     <string name="text_action_emergency">Emergency</string>
-    <string name="searching_drone">Searching drone</string>
+    <string name="searching_drone">Searching drone…</string>
     <string-array name="items_arrays">
         <item>Keys</item>
         <item>Phone</item>

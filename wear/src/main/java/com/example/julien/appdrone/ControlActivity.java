@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.julien.appdrone.drone.BebopDrone;
 import com.example.julien.appdrone.utils.Constant;
@@ -20,9 +21,9 @@ public class ControlActivity extends WearableActivity {
     private static final String TAG = "ControlActivity";
     private BebopDrone mBebopDrone;
 
-    private FloatingActionButton mButtonTakeOffLand;
-    private FloatingActionButton mButtonEmergency;
-    private FloatingActionButton mButtonCamera;
+    private ImageButton mButtonTakeOffLand;
+    private ImageButton mButtonEmergency;
+    private ImageButton mButtonCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

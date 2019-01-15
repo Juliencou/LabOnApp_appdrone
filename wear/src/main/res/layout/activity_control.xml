@@ -25,6 +25,7 @@
                 android:focusable="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
+                android:background="@color/light_grey"
                 android:src="@drawable/takeoff" />
 
             <ImageButton
@@ -36,6 +37,7 @@
                 android:focusable="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
+                android:background="@color/light_grey"
                 android:src="@drawable/camera" />
         </LinearLayout>
 
@@ -50,6 +52,7 @@
             android:focusable="true"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:background="@color/light_grey"
             android:src="@drawable/emergency" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
