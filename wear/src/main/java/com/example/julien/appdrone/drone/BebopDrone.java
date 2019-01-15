@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.parrot.arsdk.arcommands.ARCOMMANDS_ARDRONE3_MEDIARECORDEVENT_PICTUREEVENTCHANGED_ERROR_ENUM;
 import com.parrot.arsdk.arcommands.ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_ENUM;
+import com.parrot.arsdk.arcommands.ARCOMMANDS_ARDRONE3_PILOTING_MOVETO_ORIENTATION_MODE_ENUM;
 import com.parrot.arsdk.arcontroller.ARCONTROLLER_DEVICE_STATE_ENUM;
 import com.parrot.arsdk.arcontroller.ARCONTROLLER_DICTIONARY_KEY_ENUM;
 import com.parrot.arsdk.arcontroller.ARCONTROLLER_ERROR_ENUM;
@@ -35,6 +36,8 @@ import com.parrot.arsdk.arutils.ARUtilsManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.parrot.arsdk.arcommands.ARCOMMANDS_FOLLOW_ME_MODE_ENUM.NONE;
 
 public class BebopDrone{
     private static final String TAG = "BebopDrone";
@@ -253,6 +256,21 @@ public class BebopDrone{
     public void takePicture() {
         if ((mDeviceController != null) && (mState.equals(ARCONTROLLER_DEVICE_STATE_ENUM.ARCONTROLLER_DEVICE_STATE_RUNNING))) {
             mDeviceController.getFeatureARDrone3().sendMediaRecordPictureV2();
+        }
+    }
+
+    /**
+     * Move to the location given (latitude, longitude, altitude)
+     *
+     *
+     */
+    public void moveToLocation(double latitude, double longitude, double altitude)
+    {
+        if ((mDeviceController != null) && (mState.equals(ARCONTROLLER_DEVICE_STATE_ENUM.ARCONTROLLER_DEVICE_STATE_RUNNING)))
+        {
+            ARCOMMANDS_ARDRONE3_PILOTING_MOVETO_ORIENTATION_MODE_ENUM orientation_mode = ARCOMMANDS_ARDRONE3_PILOTING_MOVETO_ORIENTATION_MODE_ENUM.ARCOMMANDS_ARDRONE3_PILOTING_MOVETO_ORIENTATION_MODE_NONE;
+            //Log.d(toString().(orientation_mode.getValue()));
+            mDeviceController.getFeatureARDrone3().sendPilotingMoveTo(latitude,longitude,altitude,orientation_mode,0);
         }
     }
 
