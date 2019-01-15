@@ -1,5 +1,7 @@
 package com.example.julien.appdrone;
 
+import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 
@@ -14,7 +16,7 @@ import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends WearableActivity implements View.OnClickListener {
+public class MainActivity extends WearableActivity {
     private static final String TAG = "MainActivity";
 
     String[] items = new String[] {
@@ -36,17 +38,17 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         // Enables Always-on
         setAmbientEnabled();
 
-        mTextView = findViewById(R.id.text);
+        //mTextView = findViewById(R.id.text);
 
-        Intent intent = getIntent();
-        this.service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
+        //Intent intent = getIntent();
+        //this.service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
         //mBebopDrone = new BebopDrone(this, service);
     }
 
 
     @Override
     protected void onStart() {
-        super.onStart();
+      super.onStart();
     }
 
 

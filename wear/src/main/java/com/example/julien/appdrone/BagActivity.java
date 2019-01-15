@@ -30,7 +30,7 @@ public class BagActivity extends FragmentActivity
         "Phone",
         "Wallet",
         "Water",
-        "Earphones", 
+        "Earphones",
         "Battery"
     };
 

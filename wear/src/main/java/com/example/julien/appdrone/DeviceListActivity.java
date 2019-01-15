@@ -57,6 +57,10 @@ public class DeviceListActivity extends WearableActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
+        Intent intent_test = null;
+        intent_test = new Intent(DeviceListActivity.this, MainActivity.class);
+        startActivity(intent_test);
+
         final ListView listView = (ListView) findViewById(R.id.listDevices);
 
         // Assign adapter to ListView
@@ -81,11 +85,9 @@ public class DeviceListActivity extends WearableActivity {
                         Log.e(TAG, "The type " + product + " is not supported by this sample");
                 }
 
-                if (intent != null) {
+                //if (intent != null) {
                     // goto main dashboard
-                    intent.putExtra(Constant.DRONE_SERVICE, service);
-                    startActivity(intent);
-                }
+                //}
             }
         });
 
