@@ -21,7 +21,7 @@ import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 public class ControlActivity extends WearableActivity {
     private static final String TAG = "ControlActivity";
     private BebopDrone mBebopDrone;
-
+    ARDiscoveryDeviceService service;
     private ImageButton mButtonTakeOffLand;
     private ImageButton mButtonEmergency;
     private ImageButton mButtonCamera;
@@ -32,12 +32,20 @@ public class ControlActivity extends WearableActivity {
         setContentView(R.layout.activity_control);
 
         Intent intent = getIntent();
-        ARDiscoveryDeviceService service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
+        service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
         mBebopDrone = new BebopDrone(this, service);
         mBebopDrone.addListener(mBebopListener);
 
         initActivity();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent();
+        intent.putExtra(Constant.DRONE_SERVICE, service);
+        setResult(RESULT_OK, intent);
     }
 
     @Override

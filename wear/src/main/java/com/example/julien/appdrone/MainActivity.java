@@ -54,9 +54,16 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
 
         Intent intent = getIntent();
         service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
+        Toast.makeText(this, service.toString(), Toast.LENGTH_SHORT).show();
         //mBebopDrone = new BebopDrone(this, service);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
 
     @Override
     protected void onStart() {
@@ -96,14 +103,18 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         {
             bag_array = resultIntent.getStringArrayListExtra(Constant.BAG_TAG);
             service= resultIntent.getParcelableExtra(Constant.DRONE_SERVICE);
+            Toast.makeText(this, service.toString(), Toast.LENGTH_SHORT).show();
         }
         if(requestCode == FOLLOW && resultCode == RESULT_OK)
         {
             service = resultIntent.getParcelableExtra(Constant.DRONE_SERVICE);
+            Toast.makeText(this, service.toString(), Toast.LENGTH_SHORT).show();
+
         }
         if(requestCode == CONTROL_CODE && resultCode == RESULT_OK)
         {
             service= resultIntent.getParcelableExtra(Constant.DRONE_SERVICE);
+            Toast.makeText(this, service.toString(), Toast.LENGTH_SHORT).show();
         }
 
     }
