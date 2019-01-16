@@ -21,10 +21,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/straight_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emergencyButton">
+            app:layout_constraintTop_toBottomOf="@+id/emergencyButton"
+            app:layout_constraintVertical_bias="0.0">
 
             <ImageButton
                 android:id="@+id/takeOffLandButton"
@@ -73,6 +76,7 @@
             android:id="@+id/down_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
@@ -80,7 +84,8 @@
             android:scaleType="fitCenter"
             android:src="@drawable/godown"
             app:layout_constraintBottom_toTopOf="@+id/right_button"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <ImageButton
             android:id="@+id/straight_button"
@@ -88,13 +93,14 @@
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:focusable="true"
             android:scaleType="fitCenter"
             android:src="@drawable/up"
             app:layout_constraintBottom_toTopOf="@+id/back_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
@@ -154,13 +160,15 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:focusable="true"
             android:scaleType="fitCenter"
             android:src="@drawable/goup"
             app:layout_constraintBottom_toTopOf="@+id/left_button"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
