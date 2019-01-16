@@ -6,6 +6,7 @@ import android.support.wearable.activity.WearableActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.julien.appdrone.drone.BebopDrone;
 import com.example.julien.appdrone.utils.Constant;
@@ -98,6 +99,9 @@ public class ControlActivity extends WearableActivity {
         mButtonCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mBebopDrone.takePicture();
+                Toast.makeText
+                        (getApplicationContext(), "Picture taken", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
