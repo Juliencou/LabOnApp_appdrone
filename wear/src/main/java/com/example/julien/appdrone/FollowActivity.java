@@ -52,6 +52,7 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
     public String lati="";
     public String longit="";
     private Handler myHandler;
+    private boolean videostarted;
 
     private Runnable myRunnable = new Runnable() {
         @Override
@@ -83,6 +84,8 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
                 .build();
         gapi.connect();
 
+        videostarted = false;
+
         initActivity();
 
     }
@@ -109,6 +112,23 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
     public void picMethod(View view){
         mBebopDrone.takePicture();
     }
+
+
+    public void videoMethod(View view){
+
+        if(videostarted == false)
+        {
+            mBebopDrone.startVideo();
+            videostarted = true;
+        }
+        else
+        {
+            mBebopDrone.stopVideo();
+            videostarted = false;
+        }
+
+    }
+
 
 
     @SuppressLint("MissingPermission")
