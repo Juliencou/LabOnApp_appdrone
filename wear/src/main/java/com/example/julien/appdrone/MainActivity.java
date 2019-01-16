@@ -51,7 +51,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
 
 
         Intent intent = getIntent();
-        this.service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
+        service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
         //mBebopDrone = new BebopDrone(this, service);
     }
 
@@ -95,8 +95,4 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         }
 
     }
-
-
-
-
 }

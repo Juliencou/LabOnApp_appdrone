@@ -3,6 +3,7 @@ package com.example.julien.appdrone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -23,6 +24,12 @@ public class ControlActivity extends WearableActivity {
     private ImageButton mButtonTakeOffLand;
     private ImageButton mButtonEmergency;
     private ImageButton mButtonCamera;
+    private ImageButton mButtonStraight;
+    private ImageButton mButtonBack;
+    private ImageButton mButtonRight;
+    private ImageButton mButtonLeft;
+    private ImageButton mButtonUp;
+    private ImageButton mButtonDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,153 @@ public class ControlActivity extends WearableActivity {
         mButtonCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mBebopDrone.takePicture();
+            }
+        });
+
+        findViewById(R.id.up_button).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        mBebopDrone.setGaz((byte) 50);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        v.setPressed(false);
+                        mBebopDrone.setGaz((byte) 0);
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        findViewById(R.id.down_button).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        mBebopDrone.setGaz((byte) -50);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        v.setPressed(false);
+                        mBebopDrone.setGaz((byte) 0);
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+        findViewById(R.id.straight_button).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        mBebopDrone.setPitch((byte) 50);
+                        mBebopDrone.setFlag((byte) 1);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        v.setPressed(false);
+                        mBebopDrone.setPitch((byte) 0);
+                        mBebopDrone.setFlag((byte) 0);
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        findViewById(R.id.back_button).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        mBebopDrone.setPitch((byte) -50);
+                        mBebopDrone.setFlag((byte) 1);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        v.setPressed(false);
+                        mBebopDrone.setPitch((byte) 0);
+                        mBebopDrone.setFlag((byte) 0);
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        findViewById(R.id.left_button).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        mBebopDrone.setRoll((byte) -50);
+                        mBebopDrone.setFlag((byte) 1);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        v.setPressed(false);
+                        mBebopDrone.setRoll((byte) 0);
+                        mBebopDrone.setFlag((byte) 0);
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        findViewById(R.id.right_button).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        mBebopDrone.setRoll((byte) 50);
+                        mBebopDrone.setFlag((byte) 1);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        v.setPressed(false);
+                        mBebopDrone.setRoll((byte) 0);
+                        mBebopDrone.setFlag((byte) 0);
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                return true;
             }
         });
     }
