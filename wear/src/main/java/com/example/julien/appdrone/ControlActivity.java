@@ -2,7 +2,6 @@ package com.example.julien.appdrone;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 import android.widget.ImageButton;
