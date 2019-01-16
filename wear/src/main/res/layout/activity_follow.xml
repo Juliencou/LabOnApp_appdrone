@@ -15,7 +15,7 @@
         android:layout_marginHorizontal="30sp">
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/button_follow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Follow" />
@@ -32,6 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start video"
-            android:onClick="videoMethod"/>
+            />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

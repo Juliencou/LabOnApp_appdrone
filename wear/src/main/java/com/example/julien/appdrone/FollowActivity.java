@@ -53,28 +53,11 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
     public String longit="";
     private Handler myHandler;
 
-
     private Runnable myRunnable = new Runnable() {
         @Override
         public void run() {
             getloc();
             myHandler.postDelayed(this,2000);
-
-            if(follow_state)
-            {
-                switch (mBebopDrone.getFlyingState()) {
-                    case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
-                        mBebopDrone.takeOff();
-                        break;
-                    case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
-                        mBebopDrone.moveToLocation(latitude,longitude,altitude);
-                        break;
-                    case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
-                        mBebopDrone.moveToLocation(latitude,longitude,altitude);
-                        break;
-                    default:
-                }
-            }
         }
     };
 
@@ -93,7 +76,7 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
         myHandler = new Handler();
         myHandler.postDelayed(myRunnable,2000);
 
-        follow = findViewById(R.id.button7);
+        follow = findViewById(R.id.button_follow);
 
         // Enables Always-on
         //setAmbientEnabled();
@@ -108,16 +91,16 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
 
     }
 
-    private void initActivity() {
-        // Follow button
-        follow = findViewById(R.id.button7);
-        follow.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                follow_state = true;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // show a loading view while the bebop drone is connecting
+        if ((mBebopDrone != null) && !(ARCONTROLLER_DEVICE_STATE_ENUM.ARCONTROLLER_DEVICE_STATE_RUNNING.equals(mBebopDrone.getConnectionState()))) {
+            // if the connection to the Bebop fails, finish the activity
+            if (!mBebopDrone.connect()) {
+                finish();
             }
-        });
-
+        }
     }
 
     @Override
@@ -127,24 +110,10 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
             myHandler.removeCallbacks(myRunnable);
     }
 
-
     public void picMethod(View view){
         mBebopDrone.takePicture();
     }
 
-    public void videoMethod(View view) {
-        Button button = (Button) view;
-        String a=button.getText().toString();
-
-        if (a.equals("Start video")){
-            button.setText("Stop video");
-            //Code to start video here
-        }
-        if (a.equals("Stop video")){
-            button.setText("Start video");
-            //Code to  stop video here
-        }
-    }
 
     @SuppressLint("MissingPermission")
     @Override
@@ -176,24 +145,12 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
 
 
     // Should check if the permission is granted for this app
-    @SuppressLint("MissingPermission")
-    public void getlocation(View view) {
-        Task<Location> loc = flpc.getLastLocation();
-        loc.addOnSuccessListener(this);
-    }
 
     @SuppressLint("MissingPermission")
     public void getloc() {
-
-
-
-
         Task<Location> loc = flpc.getLastLocation();
         loc.addOnSuccessListener(this);
-
-
     }
-
 
     // Callback for the location task
     @Override
@@ -210,6 +167,20 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
             longit=lon;
             lati=lat;
             //Toast.makeText(this, lati.concat(",").concat(longit), Toast.LENGTH_SHORT).show();
+            if(follow_state)
+            {
+                switch (mBebopDrone.getFlyingState()) {
+                    case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
+                        break;
+                    case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
+                        mBebopDrone.moveToLocation(latitude,longitude,altitude + 2);
+                        break;
+                    case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
+                        mBebopDrone.moveToLocation(latitude,longitude,altitude + 2);
+                        break;
+                    default:
+                }
+            }
         }
         else
         {
@@ -241,6 +212,44 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
         }
     }
 
+    private void initActivity() {
+        // Follow button
+        follow = findViewById(R.id.button_follow);
+        follow.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                if(!follow_state)
+                {
+                    switch (mBebopDrone.getFlyingState()) {
+                        case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
+                            mBebopDrone.takeOff();
+                            break;
+                        case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
+                            break;
+                        case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
+                            break;
+                        default:
+                    }
+                }
+                else
+                {
+                    switch (mBebopDrone.getFlyingState()) {
+                        case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
+                            break;
+                        case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
+
+                            break;
+                        case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
+                            mBebopDrone.land();
+                            break;
+                        default:
+                    }
+                }
+            }
+        });
+
+    }
+
     private final BebopDrone.Listener mBebopListener = new BebopDrone.Listener() {
         @Override
         public void onDroneConnectionChanged(ARCONTROLLER_DEVICE_STATE_ENUM state) {
@@ -262,10 +271,14 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
         public void onPilotingStateChanged(ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_ENUM state) {
             switch (state) {
                 case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
-                    follow.setText("Stop Follow");
                     break;
                 case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
+                    follow.setText("Stop Follow");
+                    follow_state = true;
+                    break;
                 case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
+                    follow.setText("Stop Follow");
+                    follow_state = true;
                     break;
                 default:
             }
