@@ -25,12 +25,6 @@ public class ControlActivity extends WearableActivity {
     private ImageButton mButtonTakeOffLand;
     private ImageButton mButtonEmergency;
     private ImageButton mButtonCamera;
-    private ImageButton mButtonStraight;
-    private ImageButton mButtonBack;
-    private ImageButton mButtonRight;
-    private ImageButton mButtonLeft;
-    private ImageButton mButtonUp;
-    private ImageButton mButtonDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
