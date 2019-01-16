@@ -124,7 +124,7 @@ public class ControlActivity extends WearableActivity {
             }
         });
 
-        findViewById(R.id.down_button).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.right_button).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
