@@ -75,9 +75,6 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
                     default:
                 }
             }
-
-
-
         }
     };
 
