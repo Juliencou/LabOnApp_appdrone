@@ -65,17 +65,13 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow);
-
         follow_state = false;
-
         Intent intent = getIntent();
         service = intent.getParcelableExtra(Constant.DRONE_SERVICE);
         mBebopDrone = new BebopDrone(this, service);
         mBebopDrone.addListener(mBebopListener);
-
         myHandler = new Handler();
         myHandler.postDelayed(myRunnable,2000);
-
         follow = findViewById(R.id.button_follow);
 
         // Enables Always-on
@@ -206,11 +202,11 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
 
     @Override
     public void onBackPressed() {
-        /*if (mBebopDrone != null) {
+        if (mBebopDrone != null) {
             if (!mBebopDrone.disconnect()) {
                 finish();
             }
-        }*/
+        }
     }
 
     private void initActivity() {
