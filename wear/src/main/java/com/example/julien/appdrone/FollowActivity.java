@@ -126,7 +126,6 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
             mBebopDrone.stopVideo();
             videostarted = false;
         }
-
     }
 
 
