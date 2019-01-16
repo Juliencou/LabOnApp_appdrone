@@ -8,4 +8,6 @@
     <string name="action_settings">WTF IS THIS STRING</string>
     <string name="menu_sync_action">Sync now</string>
     <string name="manualSyncText">doing manual sync...</string>
+    <string name="wifi_connected">wifi connected</string>
+    <string name="menu_download_action">Drone download</string>
 </resources>
