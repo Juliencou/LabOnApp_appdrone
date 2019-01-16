@@ -9,34 +9,41 @@
     <Spinner
         android:id="@+id/add_bag_item_spinner"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="0dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="2dp"
         android:entries="@array/items_arrays"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/_item_bag_list"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ListView
-        android:id="@+id/_item_bag_list"
-        android:layout_width="wrap_content"
+    <android.support.wear.widget.WearableRecyclerView
+        android:id="@+id/scrollView2"
+        android:layout_width="216dp"
         android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:background="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_bag_item_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ListView
+            android:id="@+id/_item_bag_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@color/orange" />
+    </android.support.wear.widget.WearableRecyclerView>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="67dp" />
+        app:layout_constraintGuide_begin="75dp" />
 
 </android.support.constraint.ConstraintLayout>
