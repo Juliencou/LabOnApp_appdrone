@@ -55,11 +55,11 @@ public class ControlActivity extends WearableActivity {
 
     @Override
     public void onBackPressed() {
-        if (mBebopDrone != null) {
-            if (!mBebopDrone.disconnect()) {
-                finish();
-            }
-        }
+        //if (mBebopDrone != null) {
+            //if (!mBebopDrone.disconnect()) {
+            //    finish();
+            //}
+        //}
     }
 
     private void initActivity() {

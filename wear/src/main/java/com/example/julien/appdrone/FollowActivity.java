@@ -206,11 +206,11 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
 
     @Override
     public void onBackPressed() {
-        if (mBebopDrone != null) {
+        /*if (mBebopDrone != null) {
             if (!mBebopDrone.disconnect()) {
                 finish();
             }
-        }
+        }*/
     }
 
     private void initActivity() {
