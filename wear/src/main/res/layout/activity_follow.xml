@@ -32,6 +32,7 @@
             android:id="@+id/button8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="picMethod"
             android:text="Take Picture" />
 
         <Button
