@@ -26,7 +26,12 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity android:name=".FollowActivity" />
+        <activity android:name=".FollowActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ControlActivity" />
         <activity android:name=".BagActivity" />
         <activity android:name=".MainActivity" />
