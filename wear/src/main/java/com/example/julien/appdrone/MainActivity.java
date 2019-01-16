@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.julien.appdrone.drone.BebopDrone;
 import com.example.julien.appdrone.utils.Constant;
+import com.parrot.arsdk.arcontroller.ARCONTROLLER_DEVICE_STATE_ENUM;
 import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 
 import java.util.ArrayList;
@@ -61,9 +62,12 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
-
-
-    }
+        if ((mBebopDrone != null) && !(ARCONTROLLER_DEVICE_STATE_ENUM.ARCONTROLLER_DEVICE_STATE_RUNNING.equals(mBebopDrone.getConnectionState()))) {
+            // if the connection to the Bebop fails, finish the activity
+            if (!mBebopDrone.connect()) {
+                finish();
+            }
+        }}
 
     @Override
     protected void onStart() {
