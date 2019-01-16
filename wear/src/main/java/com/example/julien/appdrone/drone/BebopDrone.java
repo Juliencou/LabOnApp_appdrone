@@ -122,6 +122,8 @@ public class BebopDrone{
     private ARUtilsManager mFtpListManager;
     private ARUtilsManager mFtpQueueManager;
 
+    private double altitude;
+
     public BebopDrone(Context context, @NonNull ARDiscoveryDeviceService deviceService) {
 
         mContext = context;
@@ -535,6 +537,13 @@ public class BebopDrone{
                             mCurrentRunId = runID;
                         }
                     });
+                }
+            }
+            //if event received is the altitude changed
+            else if ((commandKey == ARCONTROLLER_DICTIONARY_KEY_ENUM.ARCONTROLLER_DICTIONARY_KEY_ARDRONE3_PILOTINGSTATE_ALTITUDECHANGED) && (elementDictionary != null)){
+                ARControllerArgumentDictionary<Object> args = elementDictionary.get(ARControllerDictionary.ARCONTROLLER_DICTIONARY_SINGLE_KEY);
+                if (args != null) {
+                    altitude = (double)args.get(ARFeatureARDrone3.ARCONTROLLER_DICTIONARY_KEY_ARDRONE3_PILOTINGSTATE_ALTITUDECHANGED_ALTITUDE);
                 }
             }
         }
