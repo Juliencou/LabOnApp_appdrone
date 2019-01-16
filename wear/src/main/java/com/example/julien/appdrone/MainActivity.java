@@ -67,7 +67,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         Intent intent = null;
 
         if (view.getId()==R.id.followButton){
-            intent = new Intent(MainActivity.this, FollowActivity.class);
+            intent = new Intent(this, FollowActivity.class);
             intent.putExtra(Constant.DRONE_SERVICE, service);
             startActivity(intent);
 
