@@ -200,6 +200,7 @@ public class FollowActivity extends Activity implements GoogleApiClient.Connecti
         super.onStop();
         if (lc != null)
             flpc.removeLocationUpdates(lc);
+
     }
 
 

@@ -16,11 +16,12 @@ import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 
 import com.example.julien.appdrone.utils.Constant;
+import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 
 import java.util.ArrayList;
 
-public class BagActivity extends FragmentActivity
-{
+public class BagActivity extends FragmentActivity{
+    private ARDiscoveryDeviceService service;
     private static final String TAG = "BagActivity";
 
     int first_time = 1;
@@ -39,10 +40,10 @@ public class BagActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bag);
 
-        Bundle bundle = getIntent().getExtras();
+        Intent i = getIntent();
+        service = i.getParcelableExtra(Constant.DRONE_SERVICE);
+        Bundle bundle = i.getExtras();
         final ArrayList<String> items_array = bundle.getStringArrayList(Constant.BAG_TAG);
-
-
         final Spinner spinner = findViewById(R.id.add_bag_item_spinner);
 
         final spinnerAdapter adapter = new spinnerAdapter(BagActivity.this, android.R.layout.simple_list_item_1);
@@ -59,7 +60,7 @@ public class BagActivity extends FragmentActivity
 
         Intent intent = new Intent();
         intent.putExtra(Constant.BAG_TAG, items_array);
-
+        intent.putExtra(Constant.DRONE_SERVICE, service);
         setResult(RESULT_OK, intent);
 
         if(items_array.isEmpty())

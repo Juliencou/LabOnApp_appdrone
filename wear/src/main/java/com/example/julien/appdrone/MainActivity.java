@@ -21,6 +21,8 @@ import java.util.Arrays;
 
 public class MainActivity extends WearableActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
+    private static final int FOLLOW = 2;
+    private static final int CONTROL_CODE = 3;
 
     String[] items = new String[] {
     };
@@ -69,17 +71,18 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         if (view.getId()==R.id.followButton){
             intent = new Intent(this, FollowActivity.class);
             intent.putExtra(Constant.DRONE_SERVICE, service);
-            startActivity(intent);
+            startActivityForResult(intent, FOLLOW);
 
         }
         else if (view.getId()==R.id.controlButton){
             intent = new Intent(this, ControlActivity.class);
             intent.putExtra(Constant.DRONE_SERVICE, service);
-            startActivity(intent);
+            startActivityForResult(intent, CONTROL_CODE);
         }
         else if(view.getId() == R.id.bagButton){
             intent = new Intent(this, BagActivity.class);
             intent.putExtra(Constant.BAG_TAG, bag_array);
+            intent.putExtra(Constant.DRONE_SERVICE, service);
             startActivityForResult(intent,GET_BAG_ARRAY);
         }
 
@@ -92,6 +95,15 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         if(requestCode == GET_BAG_ARRAY && resultCode == RESULT_OK)
         {
             bag_array = resultIntent.getStringArrayListExtra(Constant.BAG_TAG);
+            service= resultIntent.getParcelableExtra(Constant.DRONE_SERVICE);
+        }
+        if(requestCode == FOLLOW && resultCode == RESULT_OK)
+        {
+            service = resultIntent.getParcelableExtra(Constant.DRONE_SERVICE);
+        }
+        if(requestCode == CONTROL_CODE && resultCode == RESULT_OK)
+        {
+            service= resultIntent.getParcelableExtra(Constant.DRONE_SERVICE);
         }
 
     }
